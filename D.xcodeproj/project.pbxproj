@@ -11,6 +11,12 @@
 		14BAB0F824F3D82E00CEA8EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14BAB0F724F3D82E00CEA8EB /* Assets.xcassets */; };
 		14BAB0FB24F3D82E00CEA8EB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14BAB0F924F3D82E00CEA8EB /* MainMenu.xib */; };
 		14BAB0FE24F3D82E00CEA8EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BAB0FD24F3D82E00CEA8EB /* main.m */; };
+		14BAB10824F3D90800CEA8EB /* AM2901.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BAB10724F3D90800CEA8EB /* AM2901.m */; };
+		14BAB10B24F3D94400CEA8EB /* CentralProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BAB10A24F3D94400CEA8EB /* CentralProcessor.m */; };
+		14BAB10E24F3D95500CEA8EB /* CentralProcessorIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BAB10D24F3D95500CEA8EB /* CentralProcessorIO.m */; };
+		14BAB11124F3D9EE00CEA8EB /* MacroInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BAB11024F3D9EE00CEA8EB /* MacroInstruction.m */; };
+		14BAB11424F3D9FE00CEA8EB /* MicroInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BAB11324F3D9FE00CEA8EB /* MicroInstruction.m */; };
+		14BAB11824F3DA5900CEA8EB /* DisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BAB11724F3DA5900CEA8EB /* DisplayController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +28,18 @@
 		14BAB0FC24F3D82E00CEA8EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14BAB0FD24F3D82E00CEA8EB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		14BAB0FF24F3D82E00CEA8EB /* D.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = D.entitlements; sourceTree = "<group>"; };
+		14BAB10624F3D90800CEA8EB /* AM2901.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AM2901.h; sourceTree = "<group>"; };
+		14BAB10724F3D90800CEA8EB /* AM2901.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AM2901.m; sourceTree = "<group>"; };
+		14BAB10924F3D94400CEA8EB /* CentralProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CentralProcessor.h; sourceTree = "<group>"; };
+		14BAB10A24F3D94400CEA8EB /* CentralProcessor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CentralProcessor.m; sourceTree = "<group>"; };
+		14BAB10C24F3D95500CEA8EB /* CentralProcessorIO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CentralProcessorIO.h; sourceTree = "<group>"; };
+		14BAB10D24F3D95500CEA8EB /* CentralProcessorIO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CentralProcessorIO.m; sourceTree = "<group>"; };
+		14BAB10F24F3D9EE00CEA8EB /* MacroInstruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MacroInstruction.h; sourceTree = "<group>"; };
+		14BAB11024F3D9EE00CEA8EB /* MacroInstruction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MacroInstruction.m; sourceTree = "<group>"; };
+		14BAB11224F3D9FE00CEA8EB /* MicroInstruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MicroInstruction.h; sourceTree = "<group>"; };
+		14BAB11324F3D9FE00CEA8EB /* MicroInstruction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MicroInstruction.m; sourceTree = "<group>"; };
+		14BAB11624F3DA5900CEA8EB /* DisplayController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DisplayController.h; sourceTree = "<group>"; };
+		14BAB11724F3DA5900CEA8EB /* DisplayController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DisplayController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +72,8 @@
 		14BAB0F324F3D82A00CEA8EB /* D */ = {
 			isa = PBXGroup;
 			children = (
+				14BAB11524F3DA4000CEA8EB /* Display */,
+				14BAB10524F3D8C000CEA8EB /* CP */,
 				14BAB0F424F3D82A00CEA8EB /* AppDelegate.h */,
 				14BAB0F524F3D82A00CEA8EB /* AppDelegate.m */,
 				14BAB0F724F3D82E00CEA8EB /* Assets.xcassets */,
@@ -63,6 +83,32 @@
 				14BAB0FF24F3D82E00CEA8EB /* D.entitlements */,
 			);
 			path = D;
+			sourceTree = "<group>";
+		};
+		14BAB10524F3D8C000CEA8EB /* CP */ = {
+			isa = PBXGroup;
+			children = (
+				14BAB10624F3D90800CEA8EB /* AM2901.h */,
+				14BAB10724F3D90800CEA8EB /* AM2901.m */,
+				14BAB10924F3D94400CEA8EB /* CentralProcessor.h */,
+				14BAB10A24F3D94400CEA8EB /* CentralProcessor.m */,
+				14BAB10C24F3D95500CEA8EB /* CentralProcessorIO.h */,
+				14BAB10D24F3D95500CEA8EB /* CentralProcessorIO.m */,
+				14BAB10F24F3D9EE00CEA8EB /* MacroInstruction.h */,
+				14BAB11024F3D9EE00CEA8EB /* MacroInstruction.m */,
+				14BAB11224F3D9FE00CEA8EB /* MicroInstruction.h */,
+				14BAB11324F3D9FE00CEA8EB /* MicroInstruction.m */,
+			);
+			path = CP;
+			sourceTree = "<group>";
+		};
+		14BAB11524F3DA4000CEA8EB /* Display */ = {
+			isa = PBXGroup;
+			children = (
+				14BAB11624F3DA5900CEA8EB /* DisplayController.h */,
+				14BAB11724F3DA5900CEA8EB /* DisplayController.m */,
+			);
+			path = Display;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,8 +180,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14BAB11824F3DA5900CEA8EB /* DisplayController.m in Sources */,
 				14BAB0FE24F3D82E00CEA8EB /* main.m in Sources */,
+				14BAB10824F3D90800CEA8EB /* AM2901.m in Sources */,
+				14BAB10E24F3D95500CEA8EB /* CentralProcessorIO.m in Sources */,
+				14BAB11124F3D9EE00CEA8EB /* MacroInstruction.m in Sources */,
+				14BAB10B24F3D94400CEA8EB /* CentralProcessor.m in Sources */,
 				14BAB0F624F3D82A00CEA8EB /* AppDelegate.m in Sources */,
+				14BAB11424F3D9FE00CEA8EB /* MicroInstruction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
