@@ -34,7 +34,7 @@ typedef NSUInteger ClickType;
 enum {
     Full = 2,
     Word = 3,
-    Bite = 1,
+    AByte = 1,
     Empty = 0
 };
 typedef NSUInteger IBState;

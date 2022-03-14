@@ -13,7 +13,6 @@
 		14BAB0FE24F3D82E00CEA8EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BAB0FD24F3D82E00CEA8EB /* main.m */; };
 		14BAB10824F3D90800CEA8EB /* AM2901.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BAB10724F3D90800CEA8EB /* AM2901.m */; };
 		14BAB10B24F3D94400CEA8EB /* CentralProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BAB10A24F3D94400CEA8EB /* CentralProcessor.m */; };
-		14BAB10E24F3D95500CEA8EB /* CentralProcessorIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BAB10D24F3D95500CEA8EB /* CentralProcessorIO.m */; };
 		14BAB11124F3D9EE00CEA8EB /* MacroInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BAB11024F3D9EE00CEA8EB /* MacroInstruction.m */; };
 		14BAB11424F3D9FE00CEA8EB /* MicroInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BAB11324F3D9FE00CEA8EB /* MicroInstruction.m */; };
 		14BAB11824F3DA5900CEA8EB /* DisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BAB11724F3DA5900CEA8EB /* DisplayController.m */; };
@@ -32,8 +31,6 @@
 		14BAB10724F3D90800CEA8EB /* AM2901.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AM2901.m; sourceTree = "<group>"; };
 		14BAB10924F3D94400CEA8EB /* CentralProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CentralProcessor.h; sourceTree = "<group>"; };
 		14BAB10A24F3D94400CEA8EB /* CentralProcessor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CentralProcessor.m; sourceTree = "<group>"; };
-		14BAB10C24F3D95500CEA8EB /* CentralProcessorIO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CentralProcessorIO.h; sourceTree = "<group>"; };
-		14BAB10D24F3D95500CEA8EB /* CentralProcessorIO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CentralProcessorIO.m; sourceTree = "<group>"; };
 		14BAB10F24F3D9EE00CEA8EB /* MacroInstruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MacroInstruction.h; sourceTree = "<group>"; };
 		14BAB11024F3D9EE00CEA8EB /* MacroInstruction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MacroInstruction.m; sourceTree = "<group>"; };
 		14BAB11224F3D9FE00CEA8EB /* MicroInstruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MicroInstruction.h; sourceTree = "<group>"; };
@@ -92,8 +89,6 @@
 				14BAB10724F3D90800CEA8EB /* AM2901.m */,
 				14BAB10924F3D94400CEA8EB /* CentralProcessor.h */,
 				14BAB10A24F3D94400CEA8EB /* CentralProcessor.m */,
-				14BAB10C24F3D95500CEA8EB /* CentralProcessorIO.h */,
-				14BAB10D24F3D95500CEA8EB /* CentralProcessorIO.m */,
 				14BAB10F24F3D9EE00CEA8EB /* MacroInstruction.h */,
 				14BAB11024F3D9EE00CEA8EB /* MacroInstruction.m */,
 				14BAB11224F3D9FE00CEA8EB /* MicroInstruction.h */,
@@ -183,7 +178,6 @@
 				14BAB11824F3DA5900CEA8EB /* DisplayController.m in Sources */,
 				14BAB0FE24F3D82E00CEA8EB /* main.m in Sources */,
 				14BAB10824F3D90800CEA8EB /* AM2901.m in Sources */,
-				14BAB10E24F3D95500CEA8EB /* CentralProcessorIO.m in Sources */,
 				14BAB11124F3D9EE00CEA8EB /* MacroInstruction.m in Sources */,
 				14BAB10B24F3D94400CEA8EB /* CentralProcessor.m in Sources */,
 				14BAB0F624F3D82A00CEA8EB /* AppDelegate.m in Sources */,

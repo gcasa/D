@@ -7,6 +7,7 @@
 //
 
 #import "CentralProcessor.h"
+#import "MicroInstruction.h"
 
 @implementation CentralProcessor
 
@@ -177,7 +178,7 @@
         //
         // Let the scheduler run for one clock.
         //
-        _system.Scheduler.Clock();
+        [[_system scheduler] clock];
 
         if (_iopWait_)
         {
@@ -203,16 +204,16 @@
         //
         // Grab the next instruction from the cache.
         //
-        MicroInstruction instruction = _microcodeCache[_tpc[(int)_currentTask]];
+        MicroInstruction *instruction = _microcodeCache[_tpc[(int)_currentTask]];
 
-        bool cIn = instruction.Cin;
-        bool invertPc16 = NO;
+        BOOL cIn = [instruction getCin];
+        BOOL invertPc16 = NO;
 
         //
         // If the last instruction caused a PageCross branch during a memory operation, we must
         // cancel any MDR<-, IBDisp, or AlwaysIBDisp in this instruction.
         //
-        bool pageCrossCancel = _marPageCrossBr;
+        BOOL pageCrossCancel = _marPageCrossBr;
         _marPageCrossBr = NO;
 
         //
@@ -224,7 +225,7 @@
         //
         // Latch the AltUAddr bit from the last instruction
         //
-        bool altUAddr = _altUAddr;
+        BOOL altUAddr = _altUAddr;
         _altUAddr = NO;
 
         //
@@ -236,7 +237,7 @@
         // Latch the IBError cancel bit (cancels an MDR<- operation if an IB read
         // in c1 failed due to an empty IB).
         //
-        bool ibEmptyCancel = _ibEmptyCancel;
+        BOOL ibEmptyCancel = _ibEmptyCancel;
         _ibEmptyCancel = NO;
 
         //
@@ -244,7 +245,7 @@
         // properly modify INIA at the end of this one.
         //
         NiaModiferType niaModifierType = _niaModifierType;
-        _niaModifierType = NiaModiferType.Normal;
+        _niaModifierType = Normal;
 
         //
         // Decode XBus sources:
@@ -254,41 +255,42 @@
         // Byte and/or Nibble constants from the microinstruction fields.
         // NB: instruction.Byte is set to 0 if this instruction does not specify a Byte or Nibble constant.
         //
-        _xBus = instruction.Byte;
+        _xBus = [instruction abyte];
 
-        switch (instruction.fSfZ)
+        switch ([instruction getfSfZ])
         {
-            case FunctionSelectFZ.fzNorm:
+            case fzNorm:
                 switch ((ZNormFunction)instruction.fZ)
                 {
-                    case ZNormFunction.LoadIBPtr1:
-                        if (instruction.AlwaysIBDisp ||
-                            instruction.LoadIB)
+                    case LoadIBPtr1:
+                        if ([instruction getAlwaysIBDisp] ||
+                            [instruction getLoadIB])
                         {
                             // This instruction uses IBPtr<-1 as a modifier; leave ibPtr/ibFront alone here; they will get modified later.
                         }
                         else
                         {
-                            if (_ibPtr != IBState.Byte)
+                            if (_ibPtr != AByte)
                             {
-                                _ibPtr = IBState.Byte;
+                                _ibPtr = AByte;
                                 _ibFront = _ib[1];
                             }
-
-                            if (Log.Enabled) Log.Write(LogType.Verbose, LogComponent.CPIB, "ibPtr<-1: ibPtr={0}, ibFront=0x{1:x2}", _ibPtr, _ibFront);
+/*
+                            if (Log.Enabled) Log.Write(LogType.Verbose, LogComponent.CPIB, "ibPtr<-1: ibPtr={0}, ibFront=0x{1:x2}", _ibPtr, _ibFront); */
                         }
                         break;
 
-                    case ZNormFunction.LoadIBPtr0:
-                        if (_ibPtr != IBState.Word)
+                    case LoadIBPtr0:
+                        if (_ibPtr != Word)
                         {
-                            _ibPtr = IBState.Word;
+                            _ibPtr = Word;
                             _ibFront = _ib[0];
                         }
-                        if (Log.Enabled) Log.Write(LogType.Verbose, LogComponent.CPIB, "ibPtr<-0: ibPtr={0}, ibFront=0x{1:x2}", _ibPtr, _ibFront);
+                        /*
+                        if (Log.Enabled) Log.Write(LogType.Verbose, LogComponent.CPIB, "ibPtr<-0: ibPtr={0}, ibFront=0x{1:x2}", _ibPtr, _ibFront); */
                         break;
 
-                    case ZNormFunction.LoadCinFrompc16:
+                    case zLoadCinFrompc16:
                         //
                         // Fun fact (from microcode ref, pg. 21):
                         // "Due to the way Cin is implemented in the hardware, when the Cin field of the microinstruction is
@@ -302,35 +304,36 @@
                         invertPc16 = YES;   // Invert pc16 at the end of the cycle.
                         break;
 
-                    case ZNormFunction.LoadBank:
-                        throw new NotImplementedException("Bank<- not implemented.");
+                    case LoadBank:
+                        [NSException raise: NSInternalInconsistencyException
+                                    format: @"Bank <- not implemented"];
 
-                    case ZNormFunction.AltUaddr:
+                    case AltUaddr:
                         _altUAddr = YES;
                         break;
 
-                    case ZNormFunction.LRot0:
-                        if (instruction.ABypass)
+                    case LRot0:
+                        if ([instruction getABypass])
                         {
                             _xBus = _alu.R[instruction.rA];
                         }
                         break;
 
-                    case ZNormFunction.LRot12:
+                    case LRot12:
                         if (instruction.ABypass)
                         {
                             _xBus = (ushort)((_alu.R[instruction.rA] << 12) | (_alu.R[instruction.rA] >> 4));
                         }
                         break;
 
-                    case ZNormFunction.LRot8:
+                    case LRot8:
                         if (instruction.ABypass)
                         {
                             _xBus = (ushort)((_alu.R[instruction.rA] << 8) | (_alu.R[instruction.rA] >> 8));
                         }
                         break;
 
-                    case ZNormFunction.LRot4:
+                    case LRot4:
                         if (instruction.ABypass)
                         {
                             _xBus = (ushort)((_alu.R[instruction.rA] << 4) | (_alu.R[instruction.rA] >> 12));
@@ -339,7 +342,7 @@
                 }
                 break;
 
-            case FunctionSelectFZ.IOXIn:
+            case IOXIn:
                 switch ((ZIOXIn)instruction.fZ)
                 {
                     case ZIOXIn.ReadEIdata:
@@ -512,7 +515,7 @@
         // Handle <-MD instructions which occur only in C3.
         if (instruction.mem && _cycle == 3)
         {
-            bool valid = NO;
+            BOOL valid = NO;
             _xBus = _system.MemoryController.ReadMD(_currentTask, out valid);
 
             if (!valid)
@@ -624,19 +627,19 @@
         {
             switch ((ZNormFunction)instruction.fZ)
             {
-                case ZNormFunction.LRot0:
+                case LRot0:
                     _xBus = _yBus;
                     break;
 
-                case ZNormFunction.LRot12:
+                case LRot12:
                     _xBus = (ushort)((_yBus << 12) | (_yBus >> 4));
                     break;
 
-                case ZNormFunction.LRot8:
+                case LRot8:
                     _xBus = (ushort)((_yBus << 8) | (_yBus >> 8));
                     break;
 
-                case ZNormFunction.LRot4:
+                case LRot4:
                     _xBus = (ushort)((_yBus << 4) | (_yBus >> 12));
                     break;
             }
